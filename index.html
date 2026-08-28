@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Movie</title>
+  <script src="movies.js"></script>
+  <script src="script.js" defer></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #fff;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .flex-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .form-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .input-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    input {
+      width: 200px;
+      padding: 8px;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      background-color: #161b22;
+      color: #c9d1d9;
+    }
+
+    input:focus {
+      border-color: #58a6ff;
+      outline: none;
+    }
+
+    button {
+      padding: 8px 12px;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      background-color: #21262d;
+      color: #c9d1d9;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #30363d;
+      border-color: #58a6ff;
+    }
+
+    .suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      background-color: #161b22;
+      color: #c9d1d9;
+      z-index: 10;
+    }
+
+    .suggestions div {
+      padding: 6px;
+      cursor: pointer;
+    }
+
+    .suggestions div:hover {
+      background-color: #21262d;
+    }
+
+    .summary {
+      margin-top: 20px;
+      text-align: left;
+      display: inline-block;
+      background-color: #161b22;
+      padding: 15px;
+      border-radius: 6px;
+    }
+
+    .summary p.correct {
+      color: #2da44e;
+    }
+
+    .summary p.wrong {
+      color: #cf222e;
+    }
+
+    #movieStage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+      text-align: center;
+    }
+
+    /* Центрування кнопки Play Again */
+    #restartBtn {
+      margin: 20px auto;
+      display: block;
+      text-align: center;
+    }
+  </style>
+</head>
+<body onload="startGame()">
+  <h1>🎬 Game: Guess the Movie</h1>
+
+  <div id="infoStage">
+    <h2>Stage 1: Check movie info</h2>
+
+    <div class="flex-row">
+      <div class="form-block">
+        <div class="input-row">
+          <div class="input-wrapper">
+            <input id="actorInput" placeholder="Actor" oninput="showActorSuggestions(this.value)">
+            <div id="actorSuggestions" class="suggestions"></div>
+          </div>
+          <button onclick="checkActor()">Check</button>
+        </div>
+      </div>
+
+      <div class="form-block">
+        <div class="input-row">
+          <div class="input-wrapper">
+            <input id="genreInput" placeholder="Genre" oninput="showGenreSuggestions(this.value)">
+            <div id="genreSuggestions" class="suggestions"></div>
+          </div>
+          <button onclick="checkGenre()">Check</button>
+        </div>
+      </div>
+
+      <div class="form-block">
+        <div class="input-row">
+          <div class="input-wrapper">
+            <input id="countryInput" placeholder="Country" oninput="showCountrySuggestions(this.value)">
+            <div id="countrySuggestions" class="suggestions"></div>
+          </div>
+          <button onclick="checkCountry()">Check</button>
+        </div>
+      </div>
+
+      <div class="form-block">
+        <div class="input-row">
+          <div class="input-wrapper">
+            <input id="directorInput" placeholder="Director" oninput="showDirectorSuggestions(this.value)">
+            <div id="directorSuggestions" class="suggestions"></div>
+          </div>
+          <button onclick="checkDirector()">Check</button>
+        </div>
+      </div>
+
+      <div class="form-block">
+        <div class="input-row">
+          <div class="input-wrapper">
+            <input id="decadeInput" placeholder="Decade" oninput="showDecadeSuggestions(this.value)">
+            <div id="decadeSuggestions" class="suggestions"></div>
+          </div>
+          <button onclick="checkDecade()">Check</button>
+        </div>
+      </div>
+    </div>
+
+    <p>Total attempts left: <span id="totalCounter">10</span></p>
+    <button onclick="skipToMovieStage()">🎬 Guess the Movie</button>
+  </div>
+
+  <div class="summary" id="guessHistory"><strong>Guess History:</strong><br></div>
+
+  <div id="movieStage" style="display:none;">
+    <h2>Stage 2: Guess the Movie</h2>
+    <div class="form-block">
+      <div class="input-row">
+        <div class="input-wrapper">
+          <input id="movieInput" placeholder="Movie title" oninput="showMovieSuggestions(this.value)">
+          <div id="movieSuggestions" class="suggestions"></div>
+        </div>
+        <button onclick="checkMovie()">Guess</button>
+      </div>
+    </div>
+    <p>Movie attempts: <span id="movieCounter">3</span></p>
+  </div>
+
+  <div id="result"></div>
+  <button id="restartBtn" style="display:none;" onclick="restartGame()">🔄 Play Again</button>
+</body>
+</html>
