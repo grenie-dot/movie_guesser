@@ -81,11 +81,32 @@ document.getElementById('guessForm').addEventListener('submit', (e) => {
     found = true;
   }
 
-  if (guess === currentMovie.year) {
-    flipRectangle('rect-year', currentMovie.year);
-  
-    found = true;
-  }
+ // змінна для року
+const correctYear = parseInt(currentMovie.year, 10);
+
+if (guess === currentMovie.year) {
+  flipRectangle('rect-year', currentMovie.year);
+  result.textContent = "✅ Рік!";
+  found = true;
+} else if (!isNaN(guess) && guess.length === 4) {
+  // якщо користувач ввів рік, але він неправильний
+  const rect = document.getElementById('rect-year');
+  rect.classList.add('flipped');
+  const back = rect.querySelector('.back');
+
+  const userYear = parseInt(guess, 10);
+  let arrow = "";
+  if (userYear < correctYear) arrow = "⬆"; // правильний рік більше
+  if (userYear > correctYear) arrow = "⬇"; // правильний рік менше
+
+  back.textContent = `${guess} ${arrow}`;
+  back.classList.remove('success');
+  back.classList.add('wrong'); // червоне підсвічування
+
+  result.textContent = "❌ Неправильний рік!";
+  found = true;
+}
+
 
 
   if (guess === currentMovie.director.toLowerCase()) {
