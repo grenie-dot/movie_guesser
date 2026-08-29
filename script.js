@@ -85,26 +85,33 @@ document.getElementById('guessForm').addEventListener('submit', (e) => {
 const correctYear = parseInt(currentMovie.year, 10);
 
 if (guess === currentMovie.year) {
-  flipRectangle('rect-year', currentMovie.year);
+  const rect = document.getElementById('rect-year');
+  rect.classList.add('flipped');
+  const back = rect.querySelector('.back');
+
+  back.textContent = currentMovie.year;
+  back.classList.remove('wrong');   // прибираємо червоне
+  back.classList.add('success');    // додаємо зелене
+
   found = true;
 } else if (!isNaN(guess) && guess.length === 4) {
-  // якщо користувач ввів рік, але він неправильний
   const rect = document.getElementById('rect-year');
   rect.classList.add('flipped');
   const back = rect.querySelector('.back');
 
   const userYear = parseInt(guess, 10);
   let arrow = "";
-  if (userYear < correctYear) arrow = "⬆"; // правильний рік більше
-  if (userYear > correctYear) arrow = "⬇"; // правильний рік менше
+  if (userYear < correctYear) arrow = "⬆";
+  if (userYear > correctYear) arrow = "⬇";
 
   back.textContent = `${guess} ${arrow}`;
   back.classList.remove('success');
-  back.classList.add('wrong'); // червоне підсвічування
+  back.classList.add('wrong');
 
-  
+
   found = true;
 }
+
 
 
 
