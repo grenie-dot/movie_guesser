@@ -70,11 +70,12 @@ background: #4f2f2f;   /* темно-червоний фон */
 
 
 .back.success { background: #2f4f2f; border-color: #4caf50; color: #cfc; }
-.back.wrong {
+..back.wrong {
   background: #4f2f2f;   /* темно-червоний фон */
   border-color: #f44336; /* червона рамка */
   color: #ffcfcf;        /* світло-червоний текст */
 }
+
 
 .suggestions {
   width: 25%;              /* ширина як у поля вводу */

@@ -86,7 +86,6 @@ const correctYear = parseInt(currentMovie.year, 10);
 
 if (guess === currentMovie.year) {
   flipRectangle('rect-year', currentMovie.year);
-  result.textContent = "✅ Рік!";
   found = true;
 } else if (!isNaN(guess) && guess.length === 4) {
   // якщо користувач ввів рік, але він неправильний
@@ -103,7 +102,7 @@ if (guess === currentMovie.year) {
   back.classList.remove('success');
   back.classList.add('wrong'); // червоне підсвічування
 
-  result.textContent = "❌ Неправильний рік!";
+  
   found = true;
 }
 
