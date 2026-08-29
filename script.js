@@ -1,214 +1,129 @@
-let currentMovie = null;
-let totalAttempts = 10;
-let movieAttempts = 3;
+let attempts = 10;
+let currentMovie;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function startGame() {
+function initGame() {
   currentMovie = movies[Math.floor(Math.random() * movies.length)];
-  totalAttempts = 10;
-  movieAttempts = 3;
-  document.getElementById("totalCounter").textContent = totalAttempts;
-  document.getElementById("movieCounter").textContent = movieAttempts;
-  document.getElementById("guessHistory").innerHTML = "<strong>Guess History:</strong><br>";
-  document.getElementById("infoStage").style.display = "block";
-  document.getElementById("movieStage").style.display = "none";
-  document.getElementById("result").innerHTML = "";
-  document.getElementById("restartBtn").style.display = "none";
+  console.log("Загаданий фільм:", currentMovie.title);
 }
 
-function decreaseCounter() {
-  totalAttempts--;
-  document.getElementById("totalCounter").textContent = totalAttempts;
-  if (totalAttempts <= 0) {
-    document.getElementById("result").innerHTML = `<p class="wrong">❌ Game Over! The movie was: ${currentMovie.title}</p>`;
-    document.getElementById("restartBtn").style.display = "block";
-    document.getElementById("infoStage").style.display = "none";
-    document.getElementById("movieStage").style.display = "none";
+function flipRectangle(id, text) {
+  const rect = document.getElementById(id);
+  rect.classList.add('flipped');
+  const back = rect.querySelector('.back');
+  back.textContent = text;
+  back.classList.add('success');
+}
+
+// Автопідказка (один елемент, ширина як у вводу)
+const input = document.getElementById('guessInput');
+const suggestionsBox = document.createElement('div');
+suggestionsBox.className = 'suggestions';
+document.getElementById('guessForm').after(suggestionsBox); // під формою
+
+input.addEventListener('input', () => {
+  const val = input.value.trim().toLowerCase();
+  if (val.length < 3) {
+    suggestionsBox.style.display = 'none';
+    return;
   }
-}
-function showActorSuggestions(value) {
-  const suggestions = document.getElementById("actorSuggestions");
-  suggestions.innerHTML = "";
-  if (!value) return;
-  const actors = [...new Set(movies.flatMap(m => m.actors))];
-  const filtered = actors.filter(a => a.toLowerCase().includes(value.toLowerCase()));
-  filtered.forEach(a => {
-    const div = document.createElement("div");
-    div.textContent = a;
-    div.onclick = () => {
-      document.getElementById("actorInput").value = a;
-      suggestions.innerHTML = "";
-    };
-    suggestions.appendChild(div);
-  });
-}
 
-function checkActor() {
-  const input = document.getElementById("actorInput").value.trim().toLowerCase();
-  const history = document.getElementById("guessHistory");
-  if (currentMovie.actors.map(a => a.toLowerCase()).includes(input)) {
-    history.innerHTML += `<p class="correct">✔ Actor is correct: ${input}</p>`;
+  let match = null;
+  for (const m of movies) {
+    if (m.title.toLowerCase().startsWith(val)) { match = m.title; break; }
+    if (m.country.toLowerCase().startsWith(val)) { match = m.country; break; }
+    if (m.year.startsWith(val)) { match = m.year; break; }
+    if (m.director.toLowerCase().startsWith(val)) { match = m.director; break; }
+    const actor = m.actors.find(a => a.toLowerCase().startsWith(val));
+    if (actor) { match = actor; break; }
+    const genre = m.genre.find(g => g.toLowerCase().startsWith(val));
+    if (genre) { match = genre; break; }
+  }
+
+  if (match) {
+    suggestionsBox.innerHTML = `<div>${match}</div>`;
+    suggestionsBox.style.display = 'block';
   } else {
-    history.innerHTML += `<p class="wrong">✘ Wrong actor: ${input}</p>`;
-    decreaseCounter();
+    suggestionsBox.style.display = 'none';
   }
-}
-function showGenreSuggestions(value) {
-  const suggestions = document.getElementById("genreSuggestions");
-  suggestions.innerHTML = "";
-  if (!value) return;
-  const genres = [...new Set(movies.flatMap(m => m.genre))];
-  const filtered = genres.filter(g => g.toLowerCase().includes(value.toLowerCase()));
-  filtered.forEach(g => {
-    const div = document.createElement("div");
-    div.textContent = g;
-    div.onclick = () => {
-      document.getElementById("genreInput").value = g;
-      suggestions.innerHTML = "";
-    };
-    suggestions.appendChild(div);
-  });
-}
+});
 
-function checkGenre() {
-  const input = document.getElementById("genreInput").value.trim().toLowerCase();
-  const genres = Array.isArray(currentMovie.genre) ? currentMovie.genre.map(g => g.toLowerCase()) : [currentMovie.genre.toLowerCase()];
-  const history = document.getElementById("guessHistory");
-  if (genres.includes(input)) {
-    history.innerHTML += `<p class="correct">✔ Genre is correct: ${input}</p>`;
-  } else {
-    history.innerHTML += `<p class="wrong">✘ Wrong genre: ${input}</p>`;
-    decreaseCounter();
+suggestionsBox.addEventListener('click', (e) => {
+  if (e.target.tagName === 'DIV') {
+    input.value = e.target.textContent;
+    suggestionsBox.style.display = 'none';
   }
-}
-function showCountrySuggestions(value) {
-  const suggestions = document.getElementById("countrySuggestions");
-  suggestions.innerHTML = "";
-  if (!value) return;
-  const countries = [...new Set(movies.map(m => m.country))];
-  const filtered = countries.filter(c => c.toLowerCase().includes(value.toLowerCase()));
-  filtered.forEach(c => {
-    const div = document.createElement("div");
-    div.textContent = c;
-    div.onclick = () => {
-      document.getElementById("countryInput").value = c;
-      suggestions.innerHTML = "";
-    };
-    suggestions.appendChild(div);
-  });
-}
+});
+document.getElementById('guessForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (attempts <= 0) return;
 
-function checkCountry() {
-  const input = document.getElementById("countryInput").value.trim().toLowerCase();
-  const correct = currentMovie.country.toLowerCase();
-  const history = document.getElementById("guessHistory");
-  if (input === correct) {
-    history.innerHTML += `<p class="correct">✔ Country is correct: ${currentMovie.country}</p>`;
-  } else {
-    history.innerHTML += `<p class="wrong">✘ Wrong country: ${input}</p>`;
-    decreaseCounter();
+  const guess = input.value.trim().toLowerCase();
+  attempts--;
+  document.getElementById('attempts').textContent = attempts;
+
+  let found = false;
+  const result = document.getElementById('result');
+
+  if (guess === currentMovie.title.toLowerCase()) {
+    flipRectangle('rect-country', currentMovie.country);
+    flipRectangle('rect-year', currentMovie.year);
+    flipRectangle('rect-director', currentMovie.director);
+    flipRectangle('rect-actors', 'Актори');	
+    flipRectangle('rect-genre', currentMovie.genre.join(', '));
+    attempts = 0;
+    return;
   }
-}
-function showDirectorSuggestions(value) {
-  const suggestions = document.getElementById("directorSuggestions");
-  suggestions.innerHTML = "";
-  if (!value) return;
-  const directors = [...new Set(movies.map(m => m.director))];
-  const filtered = directors.filter(d => d.toLowerCase().includes(value.toLowerCase()));
-  filtered.forEach(d => {
-    const div = document.createElement("div");
-    div.textContent = d;
-    div.onclick = () => {
-      document.getElementById("directorInput").value = d;
-      suggestions.innerHTML = "";
-    };
-    suggestions.appendChild(div);
-  });
-}
 
-function checkDirector() {
-  const input = document.getElementById("directorInput").value.trim().toLowerCase();
-  const correct = currentMovie.director.toLowerCase();
-  const history = document.getElementById("guessHistory");
-  if (input === correct) {
-    history.innerHTML += `<p class="correct">✔ Director is correct: ${currentMovie.director}</p>`;
-  } else {
-    history.innerHTML += `<p class="wrong">✘ Wrong director: ${input}</p>`;
-    decreaseCounter();
+  if (guess === currentMovie.country.toLowerCase()) {
+    flipRectangle('rect-country', currentMovie.country);
+   
+    found = true;
   }
-}
-function showDecadeSuggestions(value) {
-  const suggestions = document.getElementById("decadeSuggestions");
-  suggestions.innerHTML = "";
-  if (!value) return;
-  const decades = ["1970s", "1980s", "1990s", "2000s", "2010s", "2020s"];
-  const filtered = decades.filter(d => d.toLowerCase().includes(value.toLowerCase()));
-  filtered.forEach(d => {
-    const div = document.createElement("div");
-    div.textContent = d;
-    div.onclick = () => {
-      document.getElementById("decadeInput").value = d;
-      suggestions.innerHTML = "";
-    };
-    suggestions.appendChild(div);
-  });
-}
 
-function checkDecade() {
-  const input = document.getElementById("decadeInput").value.trim().toLowerCase();
-  const correct = currentMovie.decade.toLowerCase();
-  const history = document.getElementById("guessHistory");
-  if (input === correct) {
-    history.innerHTML += `<p class="correct">✔ Decade is correct: ${currentMovie.decade}</p>`;
-  } else {
-    history.innerHTML += `<p class="wrong">✘ Wrong decade: ${input}</p>`;
-    decreaseCounter();
+  if (guess === currentMovie.year) {
+    flipRectangle('rect-year', currentMovie.year);
+  
+    found = true;
   }
-}
-function skipToMovieStage() {
-  document.getElementById("infoStage").style.display = "none";
-  document.getElementById("movieStage").style.display = "block";
-}
 
-function showMovieSuggestions(value) {
-  const suggestions = document.getElementById("movieSuggestions");
-  suggestions.innerHTML = "";
-  if (!value) return;
-  const titles = movies.map(m => m.title);
-  const filtered = titles.filter(t => t.toLowerCase().includes(value.toLowerCase()));
-  filtered.forEach(t => {
-    const div = document.createElement("div");
-    div.textContent = t;
-    div.onclick = () => {
-      document.getElementById("movieInput").value = t;
-      suggestions.innerHTML = "";
-    };
-    suggestions.appendChild(div);
-  });
-}
 
-function checkMovie() {
-  const input = document.getElementById("movieInput").value.trim().toLowerCase();
-  const correct = currentMovie.title.toLowerCase();
-  const history = document.getElementById("guessHistory");
-
-  if (input === correct) {
-    history.innerHTML += `<p class="correct">🎉 Correct! The movie is: ${currentMovie.title}</p>`;
-    document.getElementById("result").innerHTML = "";
-    document.getElementById("restartBtn").style.display = "block";
-    document.getElementById("movieStage").style.display = "none";
-  } else {
-    movieAttempts--;
-    document.getElementById("movieCounter").textContent = movieAttempts;
-    history.innerHTML += `<p class="wrong">✘ Wrong movie guess: ${input}</p>`;
-    if (movieAttempts <= 0) {
-      document.getElementById("result").innerHTML = `<p class="wrong">❌ Game Over! The movie was: ${currentMovie.title}</p>`;
-      document.getElementById("restartBtn").style.display = "block";
-      document.getElementById("movieStage").style.display = "none";
-    } else {
-      document.getElementById("result").innerHTML = `<p class="wrong">✘ Wrong movie guess</p>`;
-    }
+  if (guess === currentMovie.director.toLowerCase()) {
+    flipRectangle('rect-director', currentMovie.director);
+    
+    found = true;
   }
-}
-function restartGame() {
-  startGame();
-}
+
+ // Актори
+else if (currentMovie.actors.some(a => a.toLowerCase() === guess)) {
+  const rect = document.getElementById('rect-actors');
+  const back = rect.querySelector('.back');
+  rect.classList.add('flipped');
+
+  const matchedActor = currentMovie.actors.find(a => a.toLowerCase() === guess);
+  back.textContent = matchedActor;
+
+  back.classList.remove('wrong');
+  back.classList.add('success'); // фарбуємо картку зеленим
+
+
+  found = true;
+} 
+
+
+
+  if (currentMovie.genre.some(g => g.toLowerCase() === guess)) {
+    flipRectangle('rect-genre', currentMovie.genre.join(', '));
+   
+    found = true;
+  }
+
+
+  if (!found && attempts === 0) {
+    result.textContent = "😢 Спроби закінчились. Фільм був: " + currentMovie.title;
+  }
+
+  input.value = "";
+});
+
+initGame();

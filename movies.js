@@ -1,237 +1,304 @@
 const movies = [
-  // 1970s
   {
-    title: "The Godfather",
-    actors: ["Marlon Brando", "Al Pacino", "James Caan", "Robert Duvall", "Diane Keaton"],
-    genre: ["Crime", "Drama"],
-    country: "USA",
-    director: "Francis Ford Coppola",
-    decade: "1970s"
+    title: "Втеча з Шоушенка",
+    title_orig: "The Shawshank Redemption",
+    year: "1994",
+    director: "Френк Дарабонт",
+    genre: ["Драма"],
+    actors: [
+      "Тім Роббінс","Морган Фрімен","Боб Ґантон","Вільям Седлер","Кленсі Браун",
+      "Гілл Беллоуз","Марк Ролстон","Джеймс Вітмор","Джеффрі ДеМанн","Ларрі Бранденбург"
+    ],
+    country: "США"
   },
   {
-    title: "Apocalypse Now",
-    actors: ["Martin Sheen", "Marlon Brando", "Robert Duvall", "Laurence Fishburne"],
-    genre: ["War", "Drama"],
-    country: "USA",
-    director: "Francis Ford Coppola",
-    decade: "1970s"
+    title: "Хрещений батько",
+    title_orig: "The Godfather",
+    year: "1972",
+    director: "Френсіс Форд Коппола",
+    genre: ["Кримінал","Драма"],
+    actors: [
+      "Марлон Брандо","Аль Пачіно","Джеймс Каан","Роберт Дювалл","Даян Кітон",
+      "Річард Кастеллано","Талія Шайр","Абе Віґода","Аль Леттіері","Джон Марлі"
+    ],
+    country: "США"
   },
   {
-    title: "Taxi Driver",
-    actors: ["Robert De Niro", "Jodie Foster", "Harvey Keitel"],
-    genre: ["Crime", "Drama"],
-    country: "USA",
-    director: "Martin Scorsese",
-    decade: "1970s"
+    title: "Темний лицар",
+    title_orig: "The Dark Knight",
+    year: "2008",
+    director: "Крістофер Нолан",
+    genre: ["Екшн","Кримінал","Драма"],
+    actors: [
+      "Крістіан Бейл","Гіт Леджер","Аарон Екгарт","Майкл Кейн","Меґґі Джилленгол",
+      "Ґері Олдман","Морган Фрімен","Кілліан Мерфі","Ентоні Майкл Голл","Монік Ґабріела Кюрнен"
+    ],
+    country: "США"
   },
   {
-    title: "A Clockwork Orange",
-    actors: ["Malcolm McDowell", "Patrick Magee", "Adrienne Corri"],
-    genre: ["Sci-Fi", "Drama"],
-    country: "UK",
-    director: "Stanley Kubrick",
-    decade: "1970s"
+    title: "Хрещений батько 2",
+    title_orig: "The Godfather: Part II",
+    year: "1974",
+    director: "Френсіс Форд Коппола",
+    genre: ["Кримінал","Драма"],
+    actors: [
+      "Аль Пачіно","Роберт Де Ніро","Роберт Дювалл","Даян Кітон","Талія Шайр",
+      "Лі Страсберґ","Майкл В. Ґаззо","Бруно Кірбі","Джон Казале","Ґастон Мошін"
+    ],
+    country: "США"
   },
   {
-    title: "Rocky",
-    actors: ["Sylvester Stallone", "Talia Shire", "Burt Young"],
-    genre: ["Drama", "Sport"],
-    country: "USA",
-    director: "John G. Avildsen",
-    decade: "1970s"
-  },
-
-  // 1980s
-  {
-    title: "Scarface",
-    actors: ["Al Pacino", "Michelle Pfeiffer", "Steven Bauer"],
-    genre: ["Crime", "Drama"],
-    country: "USA",
-    director: "Brian De Palma",
-    decade: "1980s"
+    title: "12 розгніваних чоловіків",
+    title_orig: "12 Angry Men",
+    year: "1957",
+    director: "Сідні Люмет",
+    genre: ["Драма"],
+    actors: [
+      "Генрі Фонда","Лі Дж. Кобб","Ед Беглі","Е. Дж. Маршалл","Джек Клаґман",
+      "Мартін Балсам","Джон Фідлер","Джордж Восковец","Роберт Веббер","Джозеф Свіні"
+    ],
+    country: "США"
   },
   {
-    title: "Back to the Future",
-    actors: ["Michael J. Fox", "Christopher Lloyd", "Lea Thompson"],
-    genre: ["Sci-Fi", "Adventure", "Comedy"],
-    country: "USA",
-    director: "Robert Zemeckis",
-    decade: "1980s"
+    title: "Список Шиндлера",
+    title_orig: "Schindler's List",
+    year: "1993",
+    director: "Стівен Спілберґ",
+    genre: ["Драма","Історія"],
+    actors: [
+      "Ліам Нісон","Бен Кінґслі","Рейф Файнс","Керолайн Ґудолл","Ембет Девідц",
+      "Йонатан Сагал","Малґожата Зумовська","Шмуель Леві","Беатріс Макола","Анджей Северин"
+    ],
+    country: "США"
   },
   {
-    title: "The Shining",
-    actors: ["Jack Nicholson", "Shelley Duvall", "Danny Lloyd"],
-    genre: ["Horror", "Drama"],
-    country: "USA",
-    director: "Stanley Kubrick",
-    decade: "1980s"
+    title: "Володар перснів: Повернення короля",
+    title_orig: "The Lord of the Rings: The Return of the King",
+    year: "2003",
+    director: "Пітер Джексон",
+    genre: ["Фентезі","Пригоди"],
+    actors: [
+      "Елайджа Вуд","Віґґо Мортенсен","Ієн Маккеллен","Орландо Блум","Шон Астін",
+      "Домінік Монаган","Біллі Бойд","Міранда Отто","Бернард Гілл","Карл Урбан"
+    ],
+    country: "Нова Зеландія"
   },
   {
-    title: "Blade Runner",
-    actors: ["Harrison Ford", "Rutger Hauer", "Sean Young"],
-    genre: ["Sci-Fi", "Thriller"],
-    country: "USA",
-    director: "Ridley Scott",
-    decade: "1980s"
+    title: "Кримінальне чтиво",
+    title_orig: "Pulp Fiction",
+    year: "1994",
+    director: "Квентін Тарантіно",
+    genre: ["Кримінал","Драма"],
+    actors: [
+      "Джон Траволта","Ума Турман","Семюел Л. Джексон","Брюс Вілліс","Вінґ Реймс",
+      "Гарві Кейтель","Тім Рот","Аманда Пламмер","Ерік Столц","Розанна Аркетт"
+    ],
+    country: "США"
   },
   {
-    title: "E.T. the Extra-Terrestrial",
-    actors: ["Henry Thomas", "Drew Barrymore", "Dee Wallace"],
-    genre: ["Sci-Fi", "Family"],
-    country: "USA",
-    director: "Steven Spielberg",
-    decade: "1980s"
-  },
-
-  // 1990s
-  {
-    title: "The Shawshank Redemption",
-    actors: ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
-    genre: ["Drama"],
-    country: "USA",
-    director: "Frank Darabont",
-    decade: "1990s"
+    title: "Володар перснів: Братство персня",
+    title_orig: "The Lord of the Rings: The Fellowship of the Ring",
+    year: "2001",
+    director: "Пітер Джексон",
+    genre: ["Фентезі","Пригоди"],
+    actors: [
+      "Елайджа Вуд","Ієн Маккеллен","Віґґо Мортенсен","Орландо Блум","Шон Астін",
+      "Домінік Монаган","Біллі Бойд","Кейт Бланшетт","Гуґо Вівінґ","Шон Бін"
+    ],
+    country: "Нова Зеландія"
   },
   {
-    title: "The Matrix",
-    actors: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss", "Hugo Weaving"],
-    genre: ["Sci-Fi", "Action"],
-    country: "USA",
-    director: "The Wachowskis",
-    decade: "1990s"
+    title: "Володар перснів: Дві вежі",
+    title_orig: "The Lord of the Rings: The Two Towers",
+    year: "2002",
+    director: "Пітер Джексон",
+    genre: ["Фентезі","Пригоди"],
+    actors: [
+      "Елайджа Вуд","Ієн Маккеллен","Віґґо Мортенсен","Орландо Блум","Шон Астін",
+      "Домінік Монаган","Біллі Бойд","Бернард Гілл","Карл Урбан","Енді Серкіс"
+    ],
+    country: "Нова Зеландія"
   },
   {
-    title: "Fight Club",
-    actors: ["Brad Pitt", "Edward Norton", "Helena Bonham Carter"],
-    genre: ["Drama", "Thriller"],
-    country: "USA",
-    director: "David Fincher",
-    decade: "1990s"
+    title: "Бійцівський клуб",
+    title_orig: "Fight Club",
+    year: "1999",
+    director: "Девід Фінчер",
+    genre: ["Драма","Трилер"],
+    actors: [
+      "Едвард Нортон","Бред Пітт","Гелена Бонем Картер","Міт Лоуф","Джаред Лето",
+      "Зах Ґреньє","Річард Чіссар","Девід Ендрюс","Роберт Полсон","Езра Баззінґтон"
+    ],
+    country: "США"
   },
   {
-    title: "Goodfellas",
-    actors: ["Robert De Niro", "Ray Liotta", "Joe Pesci"],
-    genre: ["Crime", "Drama"],
-    country: "USA",
-    director: "Martin Scorsese",
-    decade: "1990s"
+    title: "Форрест Ґамп",
+    title_orig: "Forrest Gump",
+    year: "1994",
+    director: "Роберт Земекіс",
+    genre: ["Драма","Романтика"],
+    actors: [
+      "Том Генкс","Робін Райт","Ґері Сініз","Саллі Філд","Майкелті Вільямсон",
+      "Хейлі Джоел Осмент","Пітер Добсон","Сі Джей Ґрін","Джеффрі Блейк","Джонатан Бріс"
+    ],
+    country: "США"
   },
   {
-    title: "Saving Private Ryan",
-    actors: ["Tom Hanks", "Matt Damon", "Tom Sizemore"],
-    genre: ["War", "Drama"],
-    country: "USA",
-    director: "Steven Spielberg",
-    decade: "1990s"
-  },
-
-  // 2000s
-  {
-    title: "The Dark Knight",
-    actors: ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine", "Gary Oldman"],
-    genre: ["Action", "Crime", "Drama"],
-    country: "USA",
-    director: "Christopher Nolan",
-    decade: "2000s"
+    title: "Початок",
+    title_orig: "Inception",
+    year: "2010",
+    director: "Крістофер Нолан",
+    genre: ["Екшн","Фантастика"],
+    actors: [
+      "Леонардо Ді Капріо","Джозеф Ґордон-Левітт","Еллен Пейдж","Том Гарді","Кен Ватанабе",
+      "Діліп Рао","Кілліан Мерфі","Том Беренджер","Майкл Кейн","Лукас Хаас"
+    ],
+    country: "США"
   },
   {
-    title: "Gladiator",
-    actors: ["Russell Crowe", "Joaquin Phoenix", "Connie Nielsen"],
-    genre: ["Action", "Drama", "Historical"],
-    country: "USA",
-    director: "Ridley Scott",
-    decade: "2000s"
+    title: "Зоряні війни: Епізод V – Імперія завдає удару у відповідь",
+    title_orig: "Star Wars: Episode V - The Empire Strikes Back",
+    year: "1980",
+    director: "Ірвін Кершнер",
+    genre: ["Фантастика","Пригоди"],
+    actors: [
+      "Марк Гемілл","Гаррісон Форд","Керрі Фішер","Біллі Ді Вільямс","Ентоні Деніелс",
+      "Девід Проуз","Пітер Мейг'ю","Кенні Бейкер","Френк Оз","Алек Ґіннесс"
+    ],
+    country: "США"
   },
   {
-    title: "The Lord of the Rings: The Fellowship of the Ring",
-    actors: ["Elijah Wood", "Ian McKellen", "Viggo Mortensen", "Orlando Bloom"],
-    genre: ["Fantasy", "Adventure"],
-    country: "New Zealand/USA",
-    director: "Peter Jackson",
-    decade: "2000s"
+    title: "Матриця",
+    title_orig: "The Matrix",
+    year: "1999",
+    director: "Лана та Ліллі Вачовські",
+    genre: ["Фантастика","Екшн"],
+    actors: [
+      "Кіану Рівз","Лоренс Фішберн","Керрі-Енн Мосс","Гуґо Вівінґ","Джо Пантоліано",
+      "Глорія Фостер","Маркус Чонг","Пол Ґоддард","Метт Дорр","Белінда МакКлорі"
+    ],
+    country: "США"
   },
   {
-    title: "City of God",
-    actors: ["Alexandre Rodrigues", "Leandro Firmino", "Seu Jorge"],
-    genre: ["Crime", "Drama"],
-    country: "Brazil",
-    director: "Fernando Meirelles",
-    decade: "2000s"
+    title: "Хороший, поганий, злий",
+    title_orig: "The Good, the Bad and the Ugly",
+    year: "1966",
+    director: "Серджо Леоне",
+    genre: ["Вестерн","Пригоди"],
+    actors: [
+      "Клінт Іствуд","Елі Воллак","Лі Ван Кліф","Альдо Джуффре","Луїджі Пістіллі",
+      "Рада Расімов","Енріко Джіґліо","Антоніо Касале","Серджо Менчі","Клаудіо Скараччіа"
+    ],
+    country: "Італія"
   },
   {
-    title: "The Departed",
-    actors: ["Leonardo DiCaprio", "Matt Damon", "Jack Nicholson", "Mark Wahlberg"],
-    genre: ["Crime", "Thriller"],
-    country: "USA",
-    director: "Martin Scorsese",
-    decade: "2000s"
-  },
-
-  // 2010s
-  {
-    title: "Interstellar",
-    actors: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain", "Michael Caine", "Matt Damon"],
-    genre: ["Sci-Fi", "Drama", "Adventure"],
-    country: "USA",
-    director: "Christopher Nolan",
-    decade: "2010s"
+    title: "Пролітаючи над гніздом зозулі",
+    title_orig: "One Flew Over the Cuckoo's Nest",
+    year: "1975",
+    director: "Мілош Форман",
+    genre: ["Драма"],
+    actors: [
+      "Джек Ніколсон","Луїза Флетчер","Вілл Семпсон","Денні ДеВіто","Сідні Лассік",
+      "Вільям Редфілд","Бред Дуріф","Крістофер Ллойд","Мюзес Ганн","Майкл Беррімен"
+    ],
+    country: "США"
   },
   {
-    title: "Whiplash",
-    actors: ["Miles Teller", "J.K. Simmons", "Paul Reiser"],
-    genre: ["Drama", "Music"],
-    country: "USA",
-    director: "Damien Chazelle",
-    decade: "2010s"
+    title: "Сім",
+    title_orig: "Se7en",
+    year: "1995",
+    director: "Девід Фінчер",
+    genre: ["Трилер","Кримінал"],
+    actors: [
+      "Бред Пітт","Морган Фрімен","Ґвінет Пелтроу","Кевін Спейсі","Р. Лі Ермі",
+      "Джон К. МакҐінлі","Пітер Краузе","Річард Шифф","Хоулт МакКаллани","Ендрю Кевін Вокер"
+    ],
+    country: "США"
   },
   {
-    title: "Parasite",
-    actors: ["Song Kang-ho", "Lee Sun-kyun", "Cho Yeo-jeong"],
-    genre: ["Drama", "Thriller"],
-    country: "South Korea",
-    director: "Bong Joon-ho",
-    decade: "2010s"
+    title: "Мовчання ягнят",
+    title_orig: "The Silence of the Lambs",
+    year: "1991",
+    director: "Джонатан Демме",
+    genre: ["Трилер","Кримінал"],
+    actors: [
+      "Джоді Фостер","Ентоні Гопкінс","Скотт Ґленн","Тед Левайн","Ентоні Хілд",
+      "Брук Сміт","Даян Бейкер","Кассі Леммонс","Чарльз Нап'єр","Френкі Фейсон"
+    ],
+    country: "США"
   },
   {
-    title: "Inception",
-    actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page", "Tom Hardy"],
-    genre: ["Sci-Fi", "Thriller"],
-    country: "USA",
-    director: "Christopher Nolan",
-    decade: "2010s"
+    title: "Волл-І",
+    title_orig: "WALL·E",
+    year: "2008",
+    director: "Ендрю Стентон",
+    genre: ["Анімація","Фантастика"],
+    actors: [
+      "Бен Бертт","Елліса Найт","Джефф Ґарлін","Фред Віллард","Макінзі Естін",
+      "Джон Ратценберґер","Кеті Наджімі","Сігурні Вівер","Тедді Ньюмен","Пітер Сохн"
+    ],
+    country: "США"
   },
   {
-    title: "Mad Max: Fury Road",
-    actors: ["Tom Hardy", "Charlize Theron", "Nicholas Hoult"],
-    genre: ["Action", "Adventure"],
-    country: "Australia/USA",
-    director: "George Miller",
-    decade: "2010s"
-  },
-
-  // 2020s
-  {
-    title: "Dune",
-    actors: ["Timothée Chalamet", "Rebecca Ferguson", "Oscar Isaac", "Zendaya"],
-    genre: ["Sci-Fi", "Adventure", "Drama"],
-    country: "USA",
-    director: "Denis Villeneuve",
-    decade: "2020s"
+    title: "Зелена миля",
+    title_orig: "The Green Mile",
+    year: "1999",
+    director: "Френк Дарабонт",
+    genre: ["Драма","Фентезі"],
+    actors: [
+      "Том Генкс","Майкл Кларк Дункан","Девід Морс","Бонні Гант","Джеймс Кромвелл",
+      "Майкл Джетер","Грем Ґрін","Даг Хатчисон","Сем Роквелл","Баррі Пеппер"
+    ],
+    country: "США"
   },
   {
-    title: "Oppenheimer",
-    actors: ["Cillian Murphy", "Emily Blunt", "Matt Damon", "Robert Downey Jr."],
-    genre: ["Drama", "Historical", "Biography"],
-    country: "USA",
-    director: "Christopher Nolan",
-    decade: "2020s"
+    title: "Інтерстеллар",
+    title_orig: "Interstellar",
+    year: "2014",
+    director: "Крістофер Нолан",
+    genre: ["Фантастика","Драма"],
+    actors: [
+      "Меттью МакКонахі","Енн Гетевей","Джессіка Честейн","Майкл Кейн","Кейсі Аффлек",
+      "Топер Ґрейс","Девід Ґ'яссі","Маккензі Фой","Вес Бентлі","Метт Деймон"
+    ],
+    country: "США"
   },
   {
-    title: "Everything Everywhere All at Once",
-    actors: ["Michelle Yeoh", "Ke Huy Quan", "Stephanie Hsu", "Jamie Lee Curtis"],
-    genre: ["Sci-Fi", "Comedy", "Drama"],
-    country: "USA",
-    director: "Daniel Kwan, Daniel Scheinert",
-    decade: "2020s"
+    title: "Паразити",
+    title_orig: "Parasite",
+    year: "2019",
+    director: "Пон Джун Хо",
+    genre: ["Драма","Трилер"],
+    actors: [
+      "Сон Кан Хо","Лі Сон Кюн","Чо Йо Джон","Чхве У Шик","Пак Со Дам",
+      "Лі Джон Ен","Чон Джі Со","Пак Мьон Хун","Чон Хьон Джун","Кім Кі Ха"
+    ],
+    country: "Південна Корея"
+  },
+  {
+    title: "Зоряні війни: Епізод IV – Нова надія",
+    title_orig: "Star Wars: Episode IV - A New Hope",
+    year: "1977",
+    director: "Джордж Лукас",
+    genre: ["Фантастика","Пригоди"],
+    actors: [
+      "Марк Гемілл","Гаррісон Форд","Керрі Фішер","Пітер Кушинг","Алек Ґіннесс",
+      "Ентоні Деніелс","Кенні Бейкер","Пітер Мейг'ю","Філ Браун","Джеймс Ерл Джонс"
+    ],
+    country: "США"
+  },
+  {
+    title: "Зоряні війни: Епізод VI – Повернення джедая",
+    title_orig: "Star Wars: Episode VI - Return of the Jedi",
+    year: "1983",
+    director: "Річард Маркванд",
+    genre: ["Фантастика","Пригоди"],
+    actors: [
+      "Марк Гемілл","Гаррісон Форд","Керрі Фішер","Біллі Ді Вільямс","Ентоні Деніелс",
+      "Пітер Мейг'ю","Кенні Бейкер","Френк Оз","Алек Ґіннесс","Ієн МакДіармід"
+    ],
+    country: "США"
   }
-  ]
+];
+
+
