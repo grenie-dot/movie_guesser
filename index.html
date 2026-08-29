@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Movie Game</title>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>
+
+
+
+</h1>
+
+
+  <div class="container">
+    <div class="rectangle" id="rect-country"><div class="inner"><div class="face front">Країна</div><div class="face back"></div></div></div>
+    <div class="rectangle" id="rect-year"><div class="inner"><div class="face front">Рік</div><div class="face back"></div></div></div>
+    <div class="rectangle" id="rect-director"><div class="inner"><div class="face front">Режисер</div><div class="face back"></div></div></div>
+    <div class="rectangle" id="rect-actors"><div class="inner"><div class="face front">Актори</div><div class="face back">Актори</div></div></div>
+    <div class="rectangle" id="rect-genre"><div class="inner"><div class="face front">Жанр</div><div class="face back"></div></div></div>
+  </div>
+
+  <div id="result" style="margin-top:20px; font-weight:bold;"></div>
+  
+  <form id="guessForm">
+    <input type="text" id="guessInput" placeholder="Введи актор/рік/назву...">
+    <button type="submit">Перевірити</button>
+  </form>
+    <div class="counter">Спроби: <span id="attempts">10</span></div>
+  <script src="movies.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
